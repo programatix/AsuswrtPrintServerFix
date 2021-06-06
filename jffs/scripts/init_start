@@ -1,0 +1,28 @@
+#!/bin/sh
+
+a=/etc/hotplug2.rules
+b=/rom/etc/hotplug2.rules
+c=/jffs/custom/hotplug2.rules
+d=$c.org
+
+# Create the custom folder
+mkdir -p "/jffs/custom"
+
+# Compare the file in ROM and JFFS
+if ! cmp -s $b $d
+then
+	# Make a copy
+	echo "Making a copy of " $b >> /tmp/syslog.log
+        cp $b $d
+	sed '/^exec \/sbin\/asus_lp.*/a exec \/jffs\/scripts\/restart_printer ;' $d > $c
+fi
+
+# Compare the symbolic link
+r=$(readlink -f $a)
+if [ $r == $b ]
+then
+	# Replace hotplug2 rules with our own, and restart hotplug2
+	echo "Replacing symbolic link for hotplug2" >> /tmp/syslog.log
+	ln -sf $c $a
+	killall hotplug2
+fi
