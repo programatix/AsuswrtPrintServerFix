@@ -1,7 +1,7 @@
 ## Introduction
 I owned an Asus RT-AC86U and I use it as a printer server. Starting from firmware version 3.0.0.4.386, I started having issue where clients are unable to print after the printer was powered off for a certain duration. Once this happens, I have to restart the printer server via the WebUI. I reached out to Asus but the issue is never fixed and the technical support seems to be unable to replicate it on their side.
 
-This workaround to automate the printer server restart whenever a printer is connected (or powered on) to the router by hooking into the events in ```hotplug2```.
+This is a workaround to automate the printer server restart whenever a printer is connected (or powered on) to the router by hooking into the events in ```hotplug2```.
 
 ## What does ```init_start``` do?
 1. Performs a file comparison between ```/rom/etc/hotplug2.rules``` and ```/jffs/custom/hotplug2.rules.org```.
