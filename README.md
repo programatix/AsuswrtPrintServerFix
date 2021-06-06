@@ -22,6 +22,8 @@ This workaround to automate the printer server restart whenever a printer is con
 3. Reboot the router.
 4. You may need to perform step 2 again whenever you upgrade the firmware.
 
+Note: Since we're using ```script_usbmount``` to initiate the script, you will need to permanently have a usb drive plugged into one of the USB port of the router.
+
 ## Verify that the scripts are working
 1. Browse to your router WebUI.
 2. Go to ```System Log```.
