@@ -14,7 +14,6 @@ This is a workaround to automate the printer server restart whenever a printer i
 ## Installation
 1. Copy the scripts in ```/jffs/scripts``` into the same path in your router.
 2. Register ```init_start``` to be executed on ```usbmount``` by executing the following command:
-
     ```
     nvram set script_usbmount=/jffs/scripts/init-start
     nvram commit
