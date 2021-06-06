@@ -19,7 +19,7 @@ fi
 
 # Compare the symbolic link
 r=$(readlink -f $a)
-if [ $r == $b ]
+if [ $r != $c ]
 then
 	# Replace hotplug2 rules with our own, and restart hotplug2
 	echo "Replacing symbolic link for hotplug2" >> /tmp/syslog.log
