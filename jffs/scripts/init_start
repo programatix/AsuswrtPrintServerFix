@@ -3,18 +3,19 @@
 a=/etc/hotplug2.rules
 b=/rom/etc/hotplug2.rules
 c=/jffs/custom/hotplug2.rules
-d=$c.org
+d=$c.md5
 
 # Create the custom folder
 mkdir -p "/jffs/custom"
 
-# Compare the file in ROM and JFFS
-if ! cmp -s $b $d
+# Check the hash
+if ! md5sum -cs $d;
 then
-	# Make a copy
-	echo "Making a copy of " $b >> /tmp/syslog.log
-        cp $b $d
-	sed '/^exec \/sbin\/asus_lp.*/a exec \/jffs\/scripts\/restart_printer ;' $d > $c
+        # Hash the file
+        echo "Hashing " $b >> /tmp/syslog.log
+        md5sum $b > $d
+        echo "Cloning and modifying " $b >> /tmp/syslog.log
+        sed '/^exec \/sbin\/asus_lp.*/a exec \/jffs\/scripts\/restart_printer ;'
 fi
 
 # Compare the symbolic link
