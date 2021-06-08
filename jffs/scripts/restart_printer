@@ -1,2 +1,4 @@
-service restart_lpd
+service stop_lpd
+for pid in $(pidof lpd); do kill -9 $pid; done
+service start_lpd
 service restart_u2ec
