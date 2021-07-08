@@ -4,10 +4,10 @@ I owned an Asus RT-AC86U and I use it as a printer server. Starting from firmwar
 This is a workaround to automate the printer server restart whenever a printer is connected (or powered on) to the router by hooking into the events in ```hotplug2```.
 
 ## What does ```init_start``` do?
-1. Performs a file comparison between ```/rom/etc/hotplug2.rules``` and ```/jffs/custom/hotplug2.rules.org```.
-2. If the files do not match or ```/jffs/custom/hotplug2.rules.org``` is missing,
-   * A copy of  ```/rom/etc/hotplug2.rules``` is made as ```/jffs/custom/hotplug2.rules.org```.
-   * Another copy of the same file is created as ```/jffs/custom/hotplug2.rules``` with a line added to execute ```restart_printer```.
+1. Performs a md5 check on ```/rom/etc/hotplug2.rules``` using ```/jffs/custom/hotplug2.rules.md5```.
+2. If failed or ```/jffs/custom/hotplug2.rules.md5``` is missing,
+   * A copy of  ```/rom/etc/hotplug2.rules``` as ```/jffs/custom/hotplug2.rules```is made and ```/jffs/custom/hotplug2.rules.md5``` is generated.
+   * A line is added to execute ```restart_printer```.
 3. Check if ```/etc/hotplug2.rules``` is symbolic linked to ```/jffs/custom/hotplug2.rules```.
 4. If not, replace the the symbolic link and restart ```hotplug2```.
 
